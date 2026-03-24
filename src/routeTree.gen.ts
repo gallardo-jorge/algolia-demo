@@ -9,8 +9,14 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as AskNORCRouteImport } from './routes/askNORC'
 import { Route as IndexRouteImport } from './routes/index'
 
+const AskNORCRoute = AskNORCRouteImport.update({
+  id: '/askNORC',
+  path: '/askNORC',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -19,28 +25,39 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/askNORC': typeof AskNORCRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/askNORC': typeof AskNORCRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/askNORC': typeof AskNORCRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/askNORC'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/askNORC'
+  id: '__root__' | '/' | '/askNORC'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AskNORCRoute: typeof AskNORCRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/askNORC': {
+      id: '/askNORC'
+      path: '/askNORC'
+      fullPath: '/askNORC'
+      preLoaderRoute: typeof AskNORCRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -53,6 +70,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AskNORCRoute: AskNORCRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

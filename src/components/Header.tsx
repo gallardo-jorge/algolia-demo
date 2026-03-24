@@ -1,5 +1,5 @@
 import { Link } from '@tanstack/react-router'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import {
   ChevronDown,
   ChevronRight,
@@ -15,14 +15,34 @@ import {
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false)
+  const [isScrolled, setIsScrolled] = useState(false)
   const [groupedExpanded, setGroupedExpanded] = useState<
     Record<string, boolean>
   >({})
 
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 12)
+    }
+
+    handleScroll()
+    window.addEventListener('scroll', handleScroll, { passive: true })
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }, [])
+
   return (
     <>
       {/* Top Navigation Bar */}
-      <header className="fixed inset-x-0 top-0 z-40 border-b border-white/30 bg-transparent">
+      <header
+        className={`fixed inset-x-0 top-0 z-40 border-b transition-all duration-300 ${
+          isScrolled
+            ? 'border-white/15 bg-neutral-950/70 backdrop-blur-md'
+            : 'border-white/30 bg-transparent'
+        }`}
+      >
         <div className="max-w-7xl mx-auto px-4">
           {/* Main Header */}
           <div className="flex items-center justify-between h-20">
