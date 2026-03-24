@@ -165,6 +165,8 @@ function Messages({
 }
 
 function ChatPage() {
+  const { q } = Route.useSearch()
+  const hasAutoSentRef = useRef(false)
   const [input, setInput] = useState('')
 
   const { isRecording, isTranscribing, startRecording, stopRecording } =
@@ -173,6 +175,20 @@ function ChatPage() {
 
   const { messages, sendMessage, isLoading, stop } =
     useGuitarRecommendationChat()
+
+  useEffect(() => {
+    const fallbackPrompt =
+      typeof window !== 'undefined'
+        ? new URLSearchParams(window.location.search).get('q') ?? ''
+        : ''
+    const initialPrompt = (q || fallbackPrompt).trim()
+    if (!initialPrompt || hasAutoSentRef.current) {
+      return
+    }
+
+    hasAutoSentRef.current = true
+    sendMessage(initialPrompt)
+  }, [q, sendMessage])
 
   const handleMicClick = async () => {
     if (isRecording) {
@@ -283,5 +299,8 @@ function ChatPage() {
 }
 
 export const Route = createFileRoute('/demo/ai-chat')({
+  validateSearch: (search: Record<string, unknown>) => ({
+    q: typeof search.q === 'string' ? search.q : '',
+  }),
   component: ChatPage,
 })

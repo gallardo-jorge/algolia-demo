@@ -22,7 +22,7 @@ export default function Header() {
   return (
     <>
       {/* Top Navigation Bar */}
-      <header className="fixed inset-x-0 top-0 z-40 bg-transparent border-b border-transparent">
+      <header className="fixed inset-x-0 top-0 z-40 border-b border-white/30 bg-transparent">
         <div className="max-w-7xl mx-auto px-4">
           {/* Main Header */}
           <div className="flex items-center justify-between h-20">
@@ -34,7 +34,7 @@ export default function Header() {
               <img
                 src="https://www.norc.org/content/dam/non-dynamic-logos/norc-logo/NORCLogo_Full_Grey.svg"
                 alt="NORC Logo"
-                className="h-12"
+                className="h-12 brightness-0 invert"
               />
             </Link>
 

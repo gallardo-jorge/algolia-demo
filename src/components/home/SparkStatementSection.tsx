@@ -1,4 +1,4 @@
-export function SparkStatement() {
+export function SparkStatementSection() {
   return (
     <section className="border-t border-neutral-500 bg-[#e5e5e5] px-6 py-14 md:py-16">
       <div className="mx-auto flex max-w-5xl flex-col items-center text-center">
