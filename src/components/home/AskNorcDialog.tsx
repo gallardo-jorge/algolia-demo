@@ -1,19 +1,12 @@
 import { Search } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
+import { askNorcSuggestions } from '../../data/asknorc'
 
 type AskNorcDialogProps = {
   initialPrompt?: string
   showSuggestions?: boolean
   onAsk?: (prompt: string) => void | Promise<void>
 }
-
-const suggestions = [
-  'How is AI changing the way public agencies deliver services?',
-  'What are best practices for responsible AI procurement in government?',
-  'Has NORC published findings on trust in AI-generated information?',
-  'What guidelines support transparent AI use in public decision-making?',
-  'What does NORC research say about measuring AI impact over time?',
-]
 
 export function AskNorcDialog({
   initialPrompt = '',
@@ -63,7 +56,7 @@ export function AskNorcDialog({
               AskNORC Suggestions
             </p>
             <ul className="mt-3 space-y-2">
-              {suggestions.map((item) => (
+              {askNorcSuggestions.map((item) => (
                 <li key={item}>
                   <button
                     type="button"

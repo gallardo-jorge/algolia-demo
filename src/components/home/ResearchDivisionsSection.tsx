@@ -6,39 +6,22 @@ import {
   TrendingUp,
   Users,
 } from 'lucide-react'
+import { researchDivisions } from '../../data/home'
 
-const researchDivisions = [
-  {
-    icon: <BarChart3 className="h-10 w-10" />,
-    title: 'Economics',
-    description: 'Economic research and policy analysis',
-  },
-  {
-    icon: <BookOpen className="h-10 w-10" />,
-    title: 'Education',
-    description: 'Educational outcomes and systems research',
-  },
-  {
-    icon: <Globe className="h-10 w-10" />,
-    title: 'Global',
-    description: 'International research initiatives',
-  },
-  {
-    icon: <Heart className="h-10 w-10" />,
-    title: 'Health',
-    description: 'Healthcare and public health research',
-  },
-  {
-    icon: <Users className="h-10 w-10" />,
-    title: 'Public Affairs',
-    description: 'Policy and public opinion research',
-  },
-  {
-    icon: <TrendingUp className="h-10 w-10" />,
-    title: 'Research Science',
-    description: 'Advanced research methodologies',
-  },
-]
+const divisionIcons = {
+  'bar-chart': BarChart3,
+  book: BookOpen,
+  globe: Globe,
+  heart: Heart,
+  users: Users,
+  'trending-up': TrendingUp,
+}
+
+function DivisionIcon({ icon }: { icon: keyof typeof divisionIcons }) {
+  const Icon = divisionIcons[icon]
+
+  return <Icon className="h-10 w-10" />
+}
 
 export function ResearchDivisionsSection() {
   return (
@@ -61,7 +44,7 @@ export function ResearchDivisionsSection() {
               className="group cursor-pointer rounded-lg border border-gray-200 p-8 transition-all hover:border-orange-400 hover:shadow-md"
             >
               <div className="mb-4 text-neutral-900 transition-colors group-hover:text-orange-500">
-                {division.icon}
+                <DivisionIcon icon={division.icon} />
               </div>
               <h3 className="mb-2 text-xl font-bold text-neutral-900 transition-colors group-hover:text-orange-600">
                 {division.title}

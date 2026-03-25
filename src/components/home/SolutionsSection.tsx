@@ -1,4 +1,4 @@
-const solutions = ['AmeriSpeak', 'AmplifyAAPI', 'AP-NORC', 'Data Enclave']
+import { solutions } from '../../data/home'
 
 export function SolutionsSection() {
   return (

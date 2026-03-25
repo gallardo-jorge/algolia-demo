@@ -1,25 +1,5 @@
 import { ChevronRight } from 'lucide-react'
-
-const latestNews = [
-  {
-    title: 'How State Agencies Can Responsibly Use AI',
-    category: 'Policy Analysis',
-    date: 'March 2026',
-    image: '📊',
-  },
-  {
-    title: "Evaluating the World's First Under-16 Social Media Ban",
-    category: 'Global',
-    date: 'March 2026',
-    image: '📱',
-  },
-  {
-    title: 'Forget Clickbait, Connection Is the Real Hook',
-    category: 'Digital Society',
-    date: 'March 2026',
-    image: '🔗',
-  },
-]
+import { latestNews } from '../../data/home'
 
 export function LatestInsightsSection() {
   return (
