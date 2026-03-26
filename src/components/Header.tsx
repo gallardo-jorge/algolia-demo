@@ -350,7 +350,7 @@ export default function Header() {
                     onClick={() => setIsSearchOpen(false)}
                     className="block rounded-xl border border-neutral-700 bg-neutral-900/80 px-4 py-3 text-left text-white transition-colors hover:border-orange-500"
                   >
-                    <span className="font-semibold text-orange-300">AskNORC:</span>{' '}
+                    <span className="font-semibold text-orange-300">Try AskNORC Assistant:</span>{' '}
                     <span className="underline decoration-orange-400 decoration-2 underline-offset-4">
                       &ldquo;{searchValue.trim()}&rdquo;
                     </span>

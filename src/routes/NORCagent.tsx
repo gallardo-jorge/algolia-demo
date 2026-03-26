@@ -49,7 +49,7 @@ function NorcAgentPage() {
       <div className="relative mx-auto max-w-[1280px]">
         <div className="mx-auto mb-8 max-w-3xl text-center">
           <p className="mb-2 text-xs uppercase tracking-[0.25em] text-orange-400">
-            AskNORC Assistant
+            AskNORC AI Assistant
           </p>
           <h1 className="font-['Georgia'] text-5xl font-bold leading-[0.95] tracking-tight sm:text-6xl">
             AskNORC
