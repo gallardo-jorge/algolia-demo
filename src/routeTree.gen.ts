@@ -10,11 +10,17 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as AskNORCRouteImport } from './routes/askNORC'
+import { Route as NORCagentRouteImport } from './routes/NORCagent'
 import { Route as IndexRouteImport } from './routes/index'
 
 const AskNORCRoute = AskNORCRouteImport.update({
   id: '/askNORC',
   path: '/askNORC',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NORCagentRoute = NORCagentRouteImport.update({
+  id: '/NORCagent',
+  path: '/NORCagent',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -25,27 +31,31 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/NORCagent': typeof NORCagentRoute
   '/askNORC': typeof AskNORCRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/NORCagent': typeof NORCagentRoute
   '/askNORC': typeof AskNORCRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/NORCagent': typeof NORCagentRoute
   '/askNORC': typeof AskNORCRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/askNORC'
+  fullPaths: '/' | '/NORCagent' | '/askNORC'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/askNORC'
-  id: '__root__' | '/' | '/askNORC'
+  to: '/' | '/NORCagent' | '/askNORC'
+  id: '__root__' | '/' | '/NORCagent' | '/askNORC'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  NORCagentRoute: typeof NORCagentRoute
   AskNORCRoute: typeof AskNORCRoute
 }
 
@@ -56,6 +66,13 @@ declare module '@tanstack/react-router' {
       path: '/askNORC'
       fullPath: '/askNORC'
       preLoaderRoute: typeof AskNORCRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/NORCagent': {
+      id: '/NORCagent'
+      path: '/NORCagent'
+      fullPath: '/NORCagent'
+      preLoaderRoute: typeof NORCagentRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -70,6 +87,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  NORCagentRoute: NORCagentRoute,
   AskNORCRoute: AskNORCRoute,
 }
 export const routeTree = rootRouteImport

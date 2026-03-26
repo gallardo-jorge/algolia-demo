@@ -34,6 +34,16 @@ export function NorcAssistantHeroSection() {
             An AI-powered research assistant that builds on your conversation,
             pulling insights from NORC reports, briefs, surveys, and public datasets.
           </p>
+
+          <div className="mt-6">
+            <button
+              type="button"
+              onClick={() => navigate({ to: '/NORCagent' })}
+              className="rounded-full border border-orange-300/70 bg-orange-500 px-6 py-2.5 text-sm font-semibold text-white transition hover:border-orange-200 hover:bg-orange-400"
+            >
+              Try AskNORC
+            </button>
+          </div>
         </div>
 
         <AskNorcDialog
