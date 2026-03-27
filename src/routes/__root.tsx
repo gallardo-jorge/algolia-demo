@@ -1,4 +1,4 @@
-import { HeadContent, Scripts, createRootRoute } from '@tanstack/react-router'
+import { HeadContent, Link, Scripts, createRootRoute } from '@tanstack/react-router'
 import { TanStackRouterDevtools } from '@tanstack/react-router-devtools'
 
 import Header from '../components/Header'
@@ -56,6 +56,13 @@ function RootDocument({ children }: { children: React.ReactNode }) {
       <body>
         <Header />
         {children}
+        <Link
+          to="/NORCagent"
+          className="fixed bottom-8 right-8 z-50 flex items-center gap-3 rounded-full bg-orange-600 px-8 py-5 text-base font-bold tracking-wide text-white shadow-[0_8px_32px_rgba(234,88,12,0.6)] ring-4 ring-orange-500/30 transition-all hover:scale-105 hover:bg-orange-500 hover:shadow-[0_12px_40px_rgba(234,88,12,0.75)] active:scale-95 active:bg-orange-700"
+        >
+          <span className="text-xl">💬</span>
+          AskNORC
+        </Link>
         {import.meta.env.DEV ? (
           <TanStackRouterDevtools position="bottom-right" />
         ) : null}

@@ -1,6 +1,6 @@
 import { createFileRoute, useNavigate } from '@tanstack/react-router'
-import { ChevronDown, SlidersHorizontal } from 'lucide-react'
-import { useMemo, useState } from 'react'
+import { ChevronDown, Send, SlidersHorizontal } from 'lucide-react'
+import { useMemo, useRef, useState } from 'react'
 import { AskNorcDialog } from '../components/home/AskNorcDialog'
 import {
   contentTypeFacets,
@@ -71,11 +71,23 @@ function AskNorcPage() {
     })
   }, [activeDivision, activeFacetFilters, activeStatus, activeTopics, activeType])
 
+  const [agentPrompt, setAgentPrompt] = useState('')
+  const agentInputRef = useRef<HTMLInputElement>(null)
+
   const handleAsk = async (prompt: string) => {
     await navigate({
       to: '/askNORC',
       search: { q: prompt },
     })
+  }
+
+  const handleAgentAsk = () => {
+    const trimmed = agentPrompt.trim()
+    if (!trimmed) {
+      agentInputRef.current?.focus()
+      return
+    }
+    navigate({ to: '/NORCagent' })
   }
 
   const toggleFacet = (groupKey: FacetGroupKey, value: string) => {
@@ -137,6 +149,26 @@ function AskNorcPage() {
               </li>
             ))}
           </ul>
+
+          <div className="mt-6 border-t border-neutral-800 pt-6 flex gap-3">
+            <input
+              ref={agentInputRef}
+              type="text"
+              value={agentPrompt}
+              onChange={(e) => setAgentPrompt(e.target.value)}
+              onKeyDown={(e) => e.key === 'Enter' && handleAgentAsk()}
+              placeholder="Ask the NORC AI Agent…"
+              className="min-w-0 flex-1 rounded-xl border border-neutral-700 bg-neutral-900/70 px-4 py-3 text-sm text-white placeholder-neutral-500 outline-none transition-colors focus:border-orange-500 focus:ring-1 focus:ring-orange-500/40"
+            />
+            <button
+              type="button"
+              onClick={handleAgentAsk}
+              className="inline-flex shrink-0 items-center gap-2 rounded-xl border border-orange-500 bg-orange-600 px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-orange-500 active:bg-orange-700"
+            >
+              <Send className="h-4 w-4" />
+              Ask
+            </button>
+          </div>
         </article>
 
         <article className="mt-8 rounded-3xl border border-neutral-800 bg-neutral-950/90 p-6 shadow-[0_20px_60px_rgba(0,0,0,0.55)] backdrop-blur-sm sm:p-8">
